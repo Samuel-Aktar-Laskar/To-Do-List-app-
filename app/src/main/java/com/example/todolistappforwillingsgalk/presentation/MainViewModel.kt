@@ -22,33 +22,21 @@ constructor(
     private val mainRepository: MainRepository,
     private val savedStateHandle: SavedStateHandle
 ): ViewModel(){
-    private val _doneTasks: MutableLiveData<DataState<List<Task>>> = MutableLiveData()
-    val doneTasks: LiveData<DataState<List<Task>>>
-        get() = _doneTasks
+
+    private val _remainingTasks: MutableLiveData<DataState<List<Task>>> = MutableLiveData()
+    val remainingTasks: LiveData<DataState<List<Task>>>
+        get() = _remainingTasks
 
     private val _completedTasks: MutableLiveData<DataState<List<Task>>> = MutableLiveData()
     val completedTasks: LiveData<DataState<List<Task>>>
         get() = _completedTasks
 
-    private val _undoneTasks: MutableLiveData<DataState<List<Task>>> = MutableLiveData()
-    val undoneTasks: LiveData<DataState<List<Task>>>
-        get() = _undoneTasks
 
-    fun refreshUndoneTasks(){
+    fun refreshRemainingTasks(){
         viewModelScope.launch {
-            mainRepository.GetUndoneTasks().onEach {
-                Log.d(TAG, "undontasks: Inside getStocks it :$it")
-                _undoneTasks.value = it
-            }.launchIn(viewModelScope)
-        }
-
-    }
-
-    fun refreshDoneTasks(){
-        viewModelScope.launch {
-            mainRepository.GetDoneTasks().onEach {
+            mainRepository.GetRemainingTasks().onEach {
                 Log.d(TAG, "refreshDoneTasks: $it")
-                _doneTasks.value = it
+                _remainingTasks.value = it
             }.launchIn(viewModelScope)
         }
     }
@@ -66,36 +54,41 @@ constructor(
         viewModelScope.launch {
             mainRepository.InsertTask(
                 CacheTask(
-                    serialNo = null,
                     task = task,
                     isDone = false,
                     isCompleted = false
                 )
             )
+            refreshRemainingTasks()
         }
     }
 
     fun TaskDone(id: Int){
         viewModelScope.launch {
             mainRepository.TaskDone(id)
+            refreshRemainingTasks()
         }
     }
 
     fun TaskUndone(id: Int){
         viewModelScope.launch {
             mainRepository.TaskUndone(id)
+            refreshRemainingTasks()
         }
     }
 
-    fun TaskCompleted(id: Int){
+    fun ClearCompletedTasks(){
         viewModelScope.launch {
-            mainRepository.TaskCompleted(id)
+            mainRepository.ClearCompletedTask()
+            refreshRemainingTasks()
+            refreshCompletedTasks()
         }
     }
 
-    fun delete(id: Int){
+    fun delete(id: Int, isR: Boolean){
         viewModelScope.launch {
             mainRepository.DeleteTask(id)
+            if (isR) refreshRemainingTasks() else refreshCompletedTasks()
         }
     }
 

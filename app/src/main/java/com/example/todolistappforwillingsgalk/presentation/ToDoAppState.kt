@@ -3,9 +3,7 @@ package com.example.todolistappforwillingsgalk.presentation
 import android.util.Log
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -25,8 +23,8 @@ enum class MainSections(
     val route: String,
     val icon: ImageVector
 ){
-    REMAINING_TASK("Remaining Tasks", "remainingtasks", Icons.Filled.Star),
-    COMPLETED_TASK("Completed Tasks", "completedtasks", Icons.Filled.Info)
+    REMAINING_TASK("Remaining Tasks", "remainingtasks", Icons.Filled.Task),
+    COMPLETED_TASK("Completed Tasks", "completedtasks", Icons.Filled.DoneAll)
 }
 
 

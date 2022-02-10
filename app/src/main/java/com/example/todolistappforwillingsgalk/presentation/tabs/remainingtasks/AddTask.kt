@@ -48,7 +48,7 @@ fun AddTask(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 //Search Bar
-                SearchBar(
+                AddTextField(
                     modifier = Modifier.weight(1f),
                     query = state.query,
                     onQueryChange = { state.query = it },
@@ -62,9 +62,13 @@ fun AddTask(
                 //Add Button
                 IconButton(
                     onClick = {
-                        validateTask(state = state, focusManager = focusManager)
-                        onAdd(state.query.text)
-                        state.query = TextFieldValue("")
+                        val b = validateTask(state = state, focusManager = focusManager)
+                        if (b){
+
+                            onAdd(state.query.text)
+                            state.query = TextFieldValue("")
+                        }
+                        else return@IconButton
 
                     },
 
@@ -117,7 +121,7 @@ class SearchState(
 
 
 @Composable
-private fun SearchBar(
+private fun AddTextField(
     query: TextFieldValue,
     state: SearchState,
     onQueryChange: (TextFieldValue) -> Unit,
@@ -209,7 +213,7 @@ private fun SearchHint() {
 @Composable
 fun PreviewSearchbar() {
     ToDoListAppforWillingsGalkTheme() {
-        SearchBar(
+        AddTextField(
             query = TextFieldValue(),
             onQueryChange = {},
             state = SearchState(TextFieldValue(), false)

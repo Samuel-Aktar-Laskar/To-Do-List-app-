@@ -17,22 +17,13 @@ constructor(
     val cacheMapper: CacheMapper,
     val taskDao: TaskDao
 ) {
-    suspend fun GetUndoneTasks(): Flow<DataState<List<Task>>> = flow {
-        emit(DataState.Loading)
-        try {
-            val _tasks = taskDao.GetUnDoneTasks()
-            val tasks = cacheMapper.mapFromEntityList(_tasks)
-            emit(DataState.Success(tasks))
-        } catch (e: Exception) {
-            emit(DataState.Error(e))
-            Log.d(TAG, "GetUndoneTasks: Error: ${e.localizedMessage}")
-        }
-    }
 
-    suspend fun GetDoneTasks(): Flow<DataState<List<Task>>> = flow {
+
+    suspend fun GetRemainingTasks(): Flow<DataState<List<Task>>> = flow {
         emit(DataState.Loading)
         try {
-            val _tasks = taskDao.GetDoneTasks()
+            Log.d(TAG, "GetRemainingTasks: Getting tasks")
+            val _tasks = taskDao.GetRemainingTasks()
             val tasks = cacheMapper.mapFromEntityList(_tasks)
             emit(DataState.Success(tasks))
         } catch (e: Exception) {
@@ -78,9 +69,9 @@ constructor(
         }
     }
 
-    suspend fun TaskCompleted(id: Int){
+    suspend fun ClearCompletedTask(){
         try {
-            taskDao.TaskCompleted(id)
+            taskDao.ClearCompletedTasks()
         } catch (e: Exception){
             Log.d(TAG, "TaskCompleted: Error :${e.localizedMessage}")
         }

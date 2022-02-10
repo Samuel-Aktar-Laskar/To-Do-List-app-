@@ -15,7 +15,8 @@ constructor(): EntityMapper<CacheTask, Task>{
     override fun mapFromEntity(entity: CacheTask): Task {
         return Task(
             task = entity.task,
-            id = entity.serialNo
+            id = entity.serialNo,
+            isDone = entity.isDone
         )
     }
 

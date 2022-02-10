@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class CacheTask(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "SerialNo")
-    val serialNo: Int?,
+    val serialNo: Int = 0,
 
     @ColumnInfo(name = "Task")
     val task: String,

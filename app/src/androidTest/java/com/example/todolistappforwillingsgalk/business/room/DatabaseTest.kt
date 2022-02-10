@@ -7,9 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -78,7 +76,7 @@ class DatabaseTest {
         )
         dao.InsertTask(task = task)
         dao.TaskDone(1)
-        val doneTasks = dao.GetDoneTasks()
+        val doneTasks = dao.GetRemainingTasks()
         assertThat(doneTasks.get(0).isDone).isTrue()
     }
 

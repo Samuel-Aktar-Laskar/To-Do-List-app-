@@ -11,11 +11,8 @@ interface TaskDao {
     @Query("SELECT * FROM Tasks")
     suspend fun GetAllTasks(): List<CacheTask>
 
-    @Query("SELECT * FROM Tasks WHERE isDone IS 0 AND isCompleted IS 0")
-    suspend fun GetUnDoneTasks(): List<CacheTask>
-
-    @Query("SELECT * FROM Tasks WHERE isDone IS 1")
-    suspend fun GetDoneTasks(): List<CacheTask>
+    @Query("SELECT * FROM Tasks WHERE isCompleted IS 0")
+    suspend fun GetRemainingTasks(): List<CacheTask>
 
     @Query("SELECT * FROM Tasks WHERE isCompleted IS 1")
     suspend fun GetCompletedTasks(): List<CacheTask>
@@ -26,10 +23,30 @@ interface TaskDao {
     @Query("UPDATE Tasks SET isDone = 0 WHERE SerialNo = :id")
     suspend fun TaskUndone(id: Int)
 
-    @Query("UPDATE Tasks SET isCompleted = 1 WHERE SerialNo = :id")
-    suspend fun TaskCompleted(id: Int)
+    @Query("UPDATE Tasks SET isCompleted = 1 WHERE isDone = 1")
+    suspend fun ClearCompletedTasks()
 
     @Query("DELETE FROM Tasks WHERE SerialNo = :id")
     suspend fun DeleteTask(id: Int)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
