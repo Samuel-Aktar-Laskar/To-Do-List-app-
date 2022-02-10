@@ -18,4 +18,10 @@ constructor(): EntityMapper<CacheTask, Task>{
             id = entity.serialNo
         )
     }
+
+    fun mapFromEntityList(entities : List<CacheTask>): List<Task>{
+        return entities.map {
+            mapFromEntity(it)
+        }
+    }
 }

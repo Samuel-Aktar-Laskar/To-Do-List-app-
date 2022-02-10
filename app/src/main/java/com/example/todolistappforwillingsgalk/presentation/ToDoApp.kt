@@ -18,7 +18,7 @@ import com.example.todolistappforwillingsgalk.presentation.ui.theme.ToDoListAppf
 
 @Composable
 fun ToDoApp(
-
+    onAdd: (String) -> Unit
 ){
     ToDoListAppforWillingsGalkTheme {
         val appState = rememberToDoAppState()
@@ -41,7 +41,7 @@ fun ToDoApp(
             ) {
 
                 jetsnackNavGraph(
-
+                    onAdd = onAdd
                 )
             }
 
@@ -50,11 +50,13 @@ fun ToDoApp(
 }
 
 private fun NavGraphBuilder.jetsnackNavGraph(
-
+onAdd: (String)->Unit
 ) {
 
     composable(MainSections.REMAINING_TASK.route) { from ->
-       RemainingTasks()
+       RemainingTasks(
+           onAdd = onAdd
+       )
         
     }
     composable(MainSections.COMPLETED_TASK.route) { from ->

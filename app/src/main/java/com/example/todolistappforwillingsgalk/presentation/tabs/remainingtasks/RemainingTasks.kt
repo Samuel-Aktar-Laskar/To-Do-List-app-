@@ -9,13 +9,14 @@ import androidx.compose.ui.unit.dp
 import com.example.todolistappforwillingsgalk.presentation.tabs.remainingtasks.AddTask
 
 @Composable
-fun RemainingTasks() {
+fun RemainingTasks(
+    onAdd: (String)->Unit
+) {
     Column() {
-        AddTask(onAdd = {
-                        //add to room database
-        },
+        AddTask(onAdd = onAdd,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
+
     }
 
 }

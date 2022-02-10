@@ -11,6 +11,9 @@ interface TaskDao {
     @Query("SELECT * FROM Tasks")
     suspend fun GetAllTasks(): List<CacheTask>
 
+    @Query("SELECT * FROM Tasks WHERE isDone IS 0 AND isCompleted IS 0")
+    suspend fun GetUnDoneTasks(): List<CacheTask>
+
     @Query("SELECT * FROM Tasks WHERE isDone IS 1")
     suspend fun GetDoneTasks(): List<CacheTask>
 
