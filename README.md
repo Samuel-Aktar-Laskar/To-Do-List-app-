@@ -30,5 +30,10 @@
     <li>Some test cases are also written for SQLite database using JUnit4 and google truth library</li>
   </ul>
   </div>
+  
+  <div>
+  <p>Also, I designed the app in figma first:  <a href="https://www.figma.com/file/vJ9tMys7fE55IpfUGz8gdW/To-Do-list-for-willings?node-id=0%3A1">Figma Link</a><p>
+  </div>
+
 
 
