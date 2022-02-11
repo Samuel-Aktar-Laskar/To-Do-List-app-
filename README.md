@@ -8,3 +8,4 @@
 <li>On Swiping right to left, the task will be deleted permanently</li>
 </ul>
 
+
