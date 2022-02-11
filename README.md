@@ -14,6 +14,10 @@
   &nbsp; <img src="Screenshots/c.jpg" width = "200">
 </div>
 <div>
+  <p>Click <a href="https://drive.google.com/file/d/1n4d6GhoEBXT8-JhT--53u1fHhIxva9Pq/view?usp=drivesdk" target="_blank">here</a> to download the apk file! <a href="https://drive.google.com/file/d/1n4d6GhoEBXT8-JhT--53u1fHhIxva9Pq/view?usp=drivesdk" target="_blank"><img src="app/src/main/res/drawable/todoicon.png" width = "50"></a></p>
+  </div>
+
+<div>
   <h2>Notes on Source Code</h2>
   <ul>
     <li>The code is entirely written in kotlin and Jetpack Compose is used for ui</li>
